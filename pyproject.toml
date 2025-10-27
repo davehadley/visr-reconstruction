@@ -1,0 +1,44 @@
+[project]
+name = "visr-reconstruction"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fsspec>=2025.9.0",
+    "h5py>=3.15.1",
+    "matplotlib>=3.10.7",
+    "numpy>=2.2.5",
+]
+dynamic = ["version"]
+
+
+[tool.hatch.version]
+path = "src/visr_reconstruction/__init__.py"
+
+[project.scripts]
+visr-reconstruction = "visr_reconstruction:__main__._main"
+
+[tool.uv]
+dev-dependencies = [
+    "mypy>=1.18.2",
+    "pytest>=8.4.2",
+    "ruff>=0.14.2",
+    "ty>=0.0.1a24",
+]
+
+[tool.mypy]
+# Ignore missing stubs for untyped third-party libraries
+ignore_missing_imports = true
+strict = true
+warn_unused_ignores = true
+warn_unreachable = true
+warn_return_any = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+packages = ["visr_reconstruction"]
+mypy_path = ["src"]
+cache_dir = ".mypy_cache"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
