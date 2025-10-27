@@ -1,0 +1,45 @@
+name: Lint & Type Check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  ruff-format:
+    name: Ruff Format Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+      - name: Run Ruff Format
+        run: uv run ruff format --check .
+
+  ruff-check:
+    name: Ruff Lint Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+      - name: Run Ruff lint check
+        run: uv run ruff check .
+
+  mypy:
+    name: Mypy Type Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+      - name: Run Mypy type check
+        run: uv run mypy .
+
+  prettier:
+    name: Prettier formating
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - run: |
+          npx prettier --check
